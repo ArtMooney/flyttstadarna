@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+  getHubspotData("offert");
+});
+
 const datepickerDate = () => {
   let date = new Date();
   date.setMonth(date.getMonth() + 6);
