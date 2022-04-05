@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  getHubspotData("offert");
-});
+getHubspotData("offert");
 
 const datepickerDate = () => {
   let date = new Date();
