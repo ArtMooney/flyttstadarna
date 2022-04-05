@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("MUST");
   getHubspotData("offert");
 });
 
