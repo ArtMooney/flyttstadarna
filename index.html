@@ -689,6 +689,12 @@
                 flyttHemstad.style.display = "block";
                 allman.style.display = "none";
               }
+
+              if (parseInt(event.srcElement.value, 10) === 1) {
+                document.getElementById("kvadratmeter").disabled = true;
+              } else {
+                document.getElementById("kvadratmeter").disabled = false;
+              }
             });
         </script>
       </div>
