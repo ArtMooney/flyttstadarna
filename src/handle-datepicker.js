@@ -1,6 +1,13 @@
 getHubspotData("offert");
+getHubspotData("offert-allman");
 
-const datepickerDate = () => {
+const datepickerMinDate = () => {
+  let date = new Date();
+  date.setDate(date.getDate() + 5);
+  return date;
+};
+
+const datepickerMaxDate = () => {
   let date = new Date();
   date.setMonth(date.getMonth() + 6);
   return date;
@@ -72,8 +79,8 @@ const datepickerDate = () => {
   return datepicker.regional.sv;
 });
 $("#datepicker").datepicker({
-  maxDate: datepickerDate(),
-  minDate: new Date(),
+  maxDate: datepickerMaxDate(),
+  minDate: datepickerMinDate(),
   firstDay: 1
 });
 $("#datepicker").on("change", function () {

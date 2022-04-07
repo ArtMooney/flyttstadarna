@@ -1,5 +1,5 @@
 <!DOCTYPE html
-><!--  Last Published: Thu Apr 07 2022 12:34:49 GMT+0000 (Coordinated Universal Time)  -->
+><!--  Last Published: Thu Apr 07 2022 12:26:26 GMT+0000 (Coordinated Universal Time)  -->
 <html
   data-wf-page="6245ab654d235e6bfb1279ab"
   data-wf-site="6245ab654d235e351c1279aa"
@@ -378,7 +378,7 @@
           <div id="w-node-_397a6e47-e11c-68ae-7722-4c9687d913e6-fb1279ab">
             <input
               type="text"
-              class="input cleaning-service w-input"
+              class="input w-input"
               maxlength="256"
               name="cleaning-service"
               data-name="cleaning-service"
@@ -587,7 +587,7 @@
           <div id="w-node-_864cc563-1506-2cbc-d3e6-8953b198f6ca-fb1279ab">
             <input
               type="text"
-              class="input cleaning-service w-input"
+              class="input w-input"
               maxlength="256"
               name="cleaning-service"
               data-name="cleaning-service"
@@ -661,26 +661,11 @@
           src="https://cdn.jsdelivr.net/gh/ArtMooney/flyttstadarna@latest/src/handle-datepicker.min.js"
         ></script>
         <script type="application/javascript">
-          const cleaningService = document.getElementsByClassName(
-            "cleaning-service"
-          );
-
-          for (const form of cleaningService) {
-            form.value = document.getElementById("clean-dropdown").value;
-          }
-
           document
             .getElementById("clean-dropdown")
             .addEventListener("change", function (event) {
               const flyttHemstad = document.getElementById("flytt-hemstad");
               const allman = document.getElementById("allman");
-              const cleaningService = document.getElementsByClassName(
-                "cleaning-service"
-              );
-
-              for (const form of cleaningService) {
-                form.value = event.srcElement.value;
-              }
 
               if (parseInt(event.srcElement.value, 10) > 1) {
                 flyttHemstad.style.display = "none";
