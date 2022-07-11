@@ -1,5 +1,5 @@
 <!DOCTYPE html
-><!--  Last Published: Mon Jul 11 2022 08:14:17 GMT+0000 (Coordinated Universal Time)  -->
+><!--  Last Published: Thu Apr 07 2022 12:34:49 GMT+0000 (Coordinated Universal Time)  -->
 <html
   data-wf-page="6245ab654d235e6bfb1279ab"
   data-wf-site="6245ab654d235e351c1279aa"
@@ -37,8 +37,6 @@
             (n.className += t + "touch");
       })(window, document);
     </script>
-    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="images/webclip.png" rel="apple-touch-icon" />
     <style>
       .navbar-button {
         -webkit-touch-callout: none;
@@ -83,21 +81,26 @@
             z-index: 2222 !important;
           }
         </style>
+
         <script type="application/javascript">
           var Webflow = Webflow || [];
           Webflow.push(function () {
             $(document).off("submit");
             $("form").submit(function (evt) {
               evt.preventDefault();
+
               var action = $(this).attr("action");
               var data = "";
+
               for (const item of $(this).serializeArray()) {
                 data = data + `${item.name}=${item.value}&`;
               }
+
               var requestOptions = {
                 method: "GET",
                 redirect: "follow"
               };
+
               fetch(
                 "https://ngine.app.n8n.cloud/webhook/flyttstadarna?" + data,
                 requestOptions
@@ -173,7 +176,7 @@
           id="offert"
           name="wf-form-offert"
           data-name="offert"
-          action="https://ngine.app.n8n.cloud/webhook/flyttstadarna"
+          action="https://artmooney.app.n8n.cloud/webhook-test/flyttstadarna"
           method="get"
           class="form-wrapper"
         >
@@ -212,16 +215,16 @@
                 required=""
                 class="input w-select"
               >
-                <option value="">Välj boende</option>
-                <option value="Lägenhet 1 rum">Lägenhet 1 rum</option>
-                <option value="Lägenhet 2 rum">Lägenhet 2 rum</option>
-                <option value="Lägenhet 3 rum">Lägenhet 3 rum</option>
-                <option value="Lägenhet 4 rum">Lägenhet 4 rum</option>
-                <option value="Lägenhet 5 rum">Lägenhet 5 rum</option>
-                <option value="Lägenhet 6 rum">Lägenhet 6 rum</option>
-                <option value="Radhus">Radhus</option>
-                <option value="Hus">Hus</option>
-                <option value="Stort hus">Stort hus</option> </select
+                <option value="null">Välj boende</option>
+                <option value="apartment 1 room">Lägenhet 1 rum</option>
+                <option value="apartment 2 room">Lägenhet 2 rum</option>
+                <option value="apartment 3 room">Lägenhet 3 rum</option>
+                <option value="apartment 4 room">Lägenhet 4 rum</option>
+                <option value="apartment 5 room">Lägenhet 5 rum</option>
+                <option value="apartment 6 room">Lägenhet 6 rum</option>
+                <option value="row-house">Radhus</option>
+                <option value="house">Hus</option>
+                <option value="large house">Stort hus</option> </select
               ><img
                 loading="lazy"
                 src="images/iconmonstr-arrow-65.svg"
@@ -255,10 +258,10 @@
                 data-name="storage-garage"
                 class="input w-select"
               >
-                <option value="Inget">Inget</option>
-                <option value="Litet">Liten</option>
-                <option value="Mellan">Mellan</option>
-                <option value="Stort">Stor</option> </select
+                <option value="none">Inget</option>
+                <option value="small">Liten</option>
+                <option value="medium">Mellan</option>
+                <option value="large">Stor</option> </select
               ><img
                 loading="lazy"
                 src="images/iconmonstr-arrow-65.svg"
@@ -278,10 +281,10 @@
                 data-name="glassed-balcony"
                 class="input w-select"
               >
-                <option value="Ingen">Inget</option>
-                <option value="Liten">Liten</option>
-                <option value="Mellan">Mellan</option>
-                <option value="Stor">Stor</option> </select
+                <option value="none">Inget</option>
+                <option value="small">Liten</option>
+                <option value="medium">Mellan</option>
+                <option value="large">Stor</option> </select
               ><img
                 loading="lazy"
                 src="images/iconmonstr-arrow-65.svg"
@@ -325,7 +328,7 @@
             />
           </div>
           <div>
-            <label for="email" class="text-slate-grey">E-post*</label
+            <label for="email" class="text-slate-grey">Email*</label
             ><input
               type="email"
               class="input w-input"
@@ -417,10 +420,7 @@
               class="button w-button"
             />
           </div>
-          <div
-            id="w-node-_397a6e47-e11c-68ae-7722-4c9687d913e6-fb1279ab"
-            class="hide1"
-          >
+          <div id="w-node-_397a6e47-e11c-68ae-7722-4c9687d913e6-fb1279ab">
             <input
               type="text"
               class="input cleaning-service w-input"
@@ -474,8 +474,8 @@
         </form>
         <div class="success-message w-form-done">
           <div class="text-black left">
-            Tack för er offertförfrågan!<br /><br />Ni kommer få ett mail från
-            oss inom kort.<br />
+            Tack för ert meddelande!<br /><br />Vi återkommer till er så snart
+            vi har möjlighet.
           </div>
         </div>
         <div class="error-message w-form-fail">
@@ -492,17 +492,10 @@
           id="offert-allman"
           name="wf-form-offert-allman"
           data-name="offert-allman"
-          action="https://ngine.app.n8n.cloud/webhook/flyttstadarna"
+          action="https://artmooney.app.n8n.cloud/webhook-test/flyttstadarna"
           method="get"
           class="form-wrapper"
         >
-          <label
-            for="beskrivning-2"
-            id="w-node-_3641c31e-2f07-7b56-71f9-b8023779d357-fb1279ab"
-            class="text-slate-grey"
-            >För denna typ av tjänst behöver vi lite mer uppgifter. Vänligen
-            beskriv mer detaljerat i fältet nedan.<br />‍</label
-          >
           <div>
             <label for="firstname-2" class="text-slate-grey">Förnamn*</label
             ><input
@@ -530,7 +523,7 @@
             />
           </div>
           <div>
-            <label for="email-2" class="text-slate-grey">E-post*</label
+            <label for="email-2" class="text-slate-grey">Email*</label
             ><input
               type="email"
               class="input w-input"
@@ -596,15 +589,15 @@
           </div>
           <div id="w-node-_23c0d080-cceb-4a70-ab7e-828cfeec10ae-fb1279ab">
             <label for="beskrivning" class="text-slate-grey"
-              >Beskriv ditt behov, så återkommer vi med en skräddarsydd
-              offert:</label
+              >För denna typ av tjänst, vänligen beskriv mer detaljerat, så
+              återkommer vi inom kort*</label
             ><textarea
               id="beskrivning"
               name="beskrivning"
               maxlength="5000"
-              data-name="field"
               placeholder=""
               required=""
+              data-name="field"
               class="input textarea w-input"
             ></textarea>
           </div>
@@ -636,10 +629,7 @@
               class="button border w-button"
             />
           </div>
-          <div
-            id="w-node-_864cc563-1506-2cbc-d3e6-8953b198f6ca-fb1279ab"
-            class="hide1"
-          >
+          <div id="w-node-_864cc563-1506-2cbc-d3e6-8953b198f6ca-fb1279ab">
             <input
               type="text"
               class="input cleaning-service w-input"
@@ -693,8 +683,8 @@
         </form>
         <div class="success-message w-form-done">
           <div class="text-black left">
-            Tack för er offertförfrågan!<br /><br />Ni kommer få ett mail från
-            oss inom kort.
+            Tack för ert meddelande!<br /><br />Vi återkommer till er så snart
+            vi har möjlighet.
           </div>
         </div>
         <div class="error-message w-form-fail">
@@ -713,15 +703,17 @@
         ></script>
         <script
           defer=""
-          src="https://cdn.jsdelivr.net/gh/ArtMooney/flyttstadarna@latest/src/handle-datepicker.js"
+          src="https://cdn.jsdelivr.net/gh/ArtMooney/flyttstadarna@latest/src/handle-datepicker.min.js"
         ></script>
         <script type="application/javascript">
           const cleaningService = document.getElementsByClassName(
             "cleaning-service"
           );
+
           for (const form of cleaningService) {
             form.value = document.getElementById("clean-dropdown").value;
           }
+
           document
             .getElementById("clean-dropdown")
             .addEventListener("change", function (event) {
@@ -730,9 +722,11 @@
               const cleaningService = document.getElementsByClassName(
                 "cleaning-service"
               );
+
               for (const form of cleaningService) {
                 form.value = event.srcElement.value;
               }
+
               if (parseInt(event.srcElement.value, 10) > 1) {
                 flyttHemstad.style.display = "none";
                 allman.style.display = "block";
