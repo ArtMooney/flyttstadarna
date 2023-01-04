@@ -79,13 +79,57 @@
       }
     </style>
     <script type="application/javascript">
-      function getHubspotData(formName) {
-        if (document.getElementById(formName)) {
-          var formId = document.getElementById(formName);
+      var Webflow = Webflow || [];
+      Webflow.push(function () {
+        $(document).off("submit");
+        $("form").submit(function (evt) {
+          evt.preventDefault();
+          var action = $(this).attr("action");
+          var data = "";
+          for (const item of $(this).serializeArray()) {
+            data = data + `${item.name}=${item.value}&`;
+          }
           var requestOptions = {
             method: "GET",
             redirect: "follow",
           };
+          fetch(
+            "https://api.ngine.se/webhook/flyttstadarna?" + data,
+            requestOptions
+          )
+            .then((response) => response.text())
+            .then((result) => {
+              document.getElementById("choose-form").style.display = "none";
+              var currentForm = evt.currentTarget;
+              currentForm.style.display = "none";
+              currentForm.parentElement.getElementsByClassName(
+                "success-message"
+              )[0].style.display = "block";
+              setTimeout(() => {
+                document.getElementById("redirect-button").click();
+              }, 3000);
+            })
+            .catch((error) => {
+              console.log("error", error);
+              document.getElementById("choose-form").style.display = "none";
+              var currentForm = evt.currentTarget;
+              currentForm.style.display = "none";
+              currentForm.parentElement.getElementsByClassName(
+                "error-message"
+              )[0].style.display = "block";
+            });
+        });
+      });
+
+      function getHubspotData(formName) {
+        if (document.getElementById(formName)) {
+          var formId = document.getElementById(formName);
+
+          var requestOptions = {
+            method: "GET",
+            redirect: "follow",
+          };
+
           fetch("https://api.ipify.org?format=json", requestOptions)
             .then((response) => response.json())
             .then((result) => {
@@ -94,6 +138,7 @@
               formId.pagename.value = document.title;
             })
             .catch((error) => console.log("error", error));
+
           if (readCookie.getCookie("hubspotutk") !== undefined) {
             formId.hubspotutk.value = readCookie.getCookie("hubspotutk");
           } else {
@@ -101,6 +146,7 @@
           }
         }
       }
+
       var readCookie = (function () {
         return {
           getCookie: function (name) {
@@ -112,6 +158,7 @@
           },
         };
       })();
+
       var createCookie = function (name, value, days) {
         var expires;
         if (days) {
@@ -123,10 +170,12 @@
         }
         document.cookie = name + "=" + value + expires + "; path=/";
       };
+
       function deleteCookie(name) {
         document.cookie =
           name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       }
+
       function listCookies() {
         var theCookies = document.cookie.split(";");
         var aString = "";
@@ -135,72 +184,6 @@
         }
         return aString;
       }
-      // ---------
-      let tal1;
-      let tal2;
-      function createMath() {
-        const svarTal = document.querySelectorAll("[svar-tal]");
-        tal1 = Math.floor(Math.random() * 12);
-        tal2 = Math.floor(Math.random() * 12);
-        for (const svar of svarTal) {
-          svar.innerHTML = tal1 + "+" + tal2 + "=";
-        }
-      }
-      window.addEventListener("load", function () {
-        createMath();
-      });
-      var Webflow = Webflow || [];
-      Webflow.push(function () {
-        $(document).off("submit");
-        $("form").submit(function (evt) {
-          evt.preventDefault();
-          var action = $(this).attr("action");
-          var data = "";
-          for (const item of $(this).serializeArray()) {
-            data = data + `${item.name}=${item.value}&`;
-          }
-          for (const item of document.querySelectorAll("[svar]")) {
-            if (parseInt(item.value) === tal1 + tal2) {
-              var requestOptions = {
-                method: "GET",
-                redirect: "follow",
-              };
-              fetch(
-                "https://api.ngine.se/webhook/flyttstadarna?" + data,
-                requestOptions
-              )
-                .then((response) => response.text())
-                .then((result) => {
-                  document.getElementById("choose-form").style.display = "none";
-                  var currentForm = evt.currentTarget;
-                  currentForm.style.display = "none";
-                  currentForm.parentElement.getElementsByClassName(
-                    "success-message"
-                  )[0].style.display = "block";
-                  setTimeout(() => {
-                    document.getElementById("redirect-button").click();
-                  }, 3000);
-                })
-                .catch((error) => {
-                  console.log("error", error);
-                  document.getElementById("choose-form").style.display = "none";
-                  var currentForm = evt.currentTarget;
-                  currentForm.style.display = "none";
-                  currentForm.parentElement.getElementsByClassName(
-                    "error-message"
-                  )[0].style.display = "block";
-                });
-            } else {
-              item.value = "";
-              item.style.backgroundColor = "#f00";
-              setTimeout(() => {
-                item.style.backgroundColor = "#f7f7f7";
-                createMath();
-              }, 100);
-            }
-          }
-        });
-      });
     </script>
   </div>
   <div
@@ -495,28 +478,13 @@
           ></label
         >
       </div>
-      <div
-        id="w-node-_561c8ae3-bba5-271d-1f25-ecc0026c7c5c-fb1279ab"
-        class="send-wrapper"
-      >
+      <div id="w-node-_561c8ae3-bba5-271d-1f25-ecc0026c7c5c-fb1279ab">
         <input
           type="submit"
-          id="send-button"
           value="Begär offert"
           data-wait="Vänta..."
+          id="send-button"
           class="button w-button"
-        /><label for="svar" svar-tal="true" class="text-slate-grey margin"
-          >Tal=</label
-        ><input
-          type="text"
-          class="input svar w-input"
-          maxlength="3"
-          name="svar"
-          data-name="svar"
-          placeholder=""
-          svar="true"
-          id="field"
-          required=""
         />
       </div>
       <div
@@ -729,28 +697,13 @@
           ></label
         >
       </div>
-      <div
-        id="w-node-_864cc563-1506-2cbc-d3e6-8953b198f6c8-fb1279ab"
-        class="send-wrapper"
-      >
+      <div id="w-node-_864cc563-1506-2cbc-d3e6-8953b198f6c8-fb1279ab">
         <input
           type="submit"
-          id="send-button-2"
           value="Begär offert"
           data-wait="Vänta..."
+          id="send-button-2"
           class="button border w-button"
-        /><label for="svar" svar-tal="true" class="text-slate-grey margin"
-          >Tal=</label
-        ><input
-          type="text"
-          class="input svar w-input"
-          maxlength="3"
-          name="svar"
-          data-name="svar"
-          placeholder=""
-          svar="true"
-          id="field"
-          required=""
         />
       </div>
       <div
@@ -838,16 +791,19 @@
       window.addEventListener("load", () => {
         getHubspotData("offert");
         getHubspotData("offert-allman");
+
         const datepickerMinDate = () => {
           let date = new Date();
           date.setDate(date.getDate() + 5);
           return date;
         };
+
         const datepickerMaxDate = () => {
           let date = new Date();
           date.setMonth(date.getMonth() + 6);
           return date;
         };
+
         (function (factory) {
           "use strict";
           if (typeof define === "function" && define.amd) {
@@ -928,6 +884,7 @@
             $("#datepicker").datepicker("show");
           });
         });
+
         const cleaningService =
           document.getElementsByClassName("cleaning-service");
         for (const form of cleaningService) {
