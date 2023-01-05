@@ -135,9 +135,10 @@
         }
         return aString;
       }
-      // ---------
+
       let tal1;
       let tal2;
+
       function createMath() {
         const svarTal = document.querySelectorAll("[svar-tal]");
         tal1 = Math.floor(Math.random() * 12);
@@ -146,9 +147,11 @@
           svar.innerHTML = tal1 + "+" + tal2 + "=";
         }
       }
+
       window.addEventListener("load", function () {
         createMath();
       });
+
       var Webflow = Webflow || [];
       Webflow.push(function () {
         $(document).off("submit");
@@ -156,17 +159,20 @@
           evt.preventDefault();
           var action = $(this).attr("action");
           var data = "";
+
           for (const item of $(this).serializeArray()) {
             data = data + `${item.name}=${item.value}&`;
           }
+
           for (const item of document.querySelectorAll("[svar]")) {
             if (parseInt(item.value) === tal1 + tal2) {
               var requestOptions = {
                 method: "GET",
                 redirect: "follow",
               };
+
               fetch(
-                "https://api.ngine.se/webhook/flyttstadarna?" + data,
+                "https://api.ngine.se/webhook/flyttstadarna-v1.1?" + data,
                 requestOptions
               )
                 .then((response) => response.text())
@@ -960,4 +966,4 @@
   src="https://cdn.jsdelivr.net/gh/ArtMooney/flyttstadarna@v0.0.1/js/flyttstadarna.js"
   type="text/javascript"
 ></script>
-<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+<!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></scrip
